@@ -5,6 +5,7 @@ import {MessageService} from "./message.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, tap} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
+import {ObjectUnsubscribedError} from "rxjs/Rx";
 
 const httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -44,6 +45,13 @@ export class HeroService {
         )
     }
 
+
+    addHero(hero: Hero): Observable<Hero> {
+        return this.http.post(this.heroesURL, hero, httpOptions).pipe(
+            tap((_hero: Hero) => this.log(`added hero w/ id=${_hero.id}`)),
+            catchError(this.handleError<Hero>('addHero'))
+        )
+    }
 
     private log(message: string) {
         this.messageService.add(message);
