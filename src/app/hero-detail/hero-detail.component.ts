@@ -19,6 +19,14 @@ export class HeroDetailComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.getHero();
     }
 
+    getHero() {
+
+        /*The JavaScript (+) operator converts the string to a number, which is what a hero id should be.*/
+        const id = +this.route.snapshot.paramMap.get('id');
+        this.heroService.getHero(id).subscribe((_hero) => this.hero = _hero);
+
+    }
 }
