@@ -34,7 +34,7 @@ export class HeroService {
         const url = `${this.heroesURL}/${id}`;
         return this.http.get<Hero>(url).pipe(
             tap(_ => this.log(`fetched hero id=${id}`)),
-            catchError(this.handleError<Hero>(`gethero id = ${id}`))
+            catchError(this.handleError<Hero>(`getHero id = ${id}`))
         );
     }
 
@@ -51,6 +51,16 @@ export class HeroService {
             tap((_hero: Hero) => this.log(`added hero w/ id=${_hero.id}`)),
             catchError(this.handleError<Hero>('addHero'))
         )
+    }
+
+    deleteHero(hero: Hero | number): Observable<Hero> {
+        const id = typeof hero === 'number' ? hero : hero.id;
+        const url = `${this.heroesURL}/${id}`;
+
+        return this.http.delete<Hero>(url, httpOptions).pipe(
+            tap(_ => this.log(`deleted hero id=${id}`)),
+            catchError(this.handleError<Hero>('deleteHero'))
+        );
     }
 
     private log(message: string) {
