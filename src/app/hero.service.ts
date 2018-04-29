@@ -6,6 +6,10 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {catchError, map, tap} from "rxjs/operators";
 import {of} from "rxjs/observable/of";
 
+const httpOptions = {
+    headers: new HttpHeaders({'Content-Type': 'application/json'})
+};
+
 @Injectable()
 export class HeroService {
 
@@ -33,10 +37,17 @@ export class HeroService {
         );
     }
 
+    updateHero(hero: Hero): Observable<any> {
+        return this.http.put(this.heroesURL, hero, httpOptions).pipe(
+            tap(_ => this.log(`updated hero id = ${hero.id}`)),
+            catchError(this.handleError<any>('updateHero'))
+        )
+    }
+
+
     private log(message: string) {
         this.messageService.add(message);
     }
-
 
     /**
      * Handle Http operation that failed.
