@@ -13,12 +13,14 @@ import {MessagesComponent} from './messages/messages.component';
 
 import {AppRoutingModule} from './/app-routing.module';
 
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
-        AppRoutingModule
+        AppRoutingModule,
+        HttpClientModule
     ],
     declarations: [
         AppComponent,
