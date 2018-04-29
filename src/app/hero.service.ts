@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Hero} from './hero';
 import {Observable} from 'rxjs/Observable';
-import {of} from 'rxjs/observable/of'
 import {MessageService} from "./message.service";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 
