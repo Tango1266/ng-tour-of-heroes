@@ -5,7 +5,6 @@ import {CommonModule} from '@angular/common';
     imports: [
         CommonModule
     ],
-    declarations: []
 })
 export class AppRoutingModule {
 }
