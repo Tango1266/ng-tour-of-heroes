@@ -17,10 +17,11 @@ export class HeroService {
 
     getHeroes(): Observable<Hero[]> {
 
-        this.log('HeroService: fetching heroes...');
-
         return this.http.get<Hero[]>(this.heroesURL)
-            .pipe(catchError(this.handleError('getHeroes', [])));
+            .pipe(
+                tap(_heroes => this.log('fetched heroes')),
+                catchError(this.handleError('getHeroes', []))
+            );
     }
 
     getHero(id: number): Observable<Hero> {
