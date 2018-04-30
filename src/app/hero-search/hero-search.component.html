@@ -1,3 +1,20 @@
-<p>
-    hero-search works!
-</p>
+<div id="search-component">
+
+    <h4> Hero Search </h4>
+
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)"/>
+
+    <ul class="search-result">
+
+        <!-- The $ is a convention that indicates heroes$ is an Observable, not an array.-->
+        <!-- https://angular.io/tutorial/toh-pt6#asyncpipe -->
+        <li *ngFor="let hero of heroes$ | async">
+            <a routerLink="/detail/{{hero.id}}">
+                {{hero.name}}
+            </a>
+
+        </li>
+
+    </ul>
+
+</div>
