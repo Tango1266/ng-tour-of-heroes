@@ -22,7 +22,13 @@ export class HeroSearchComponent implements OnInit {
 
         this.heroes$ = this.searchTerms.pipe(
             debounceTime(300),
+
             distinctUntilChanged(),
+
+            /*
+             * switchMap cancels and discards previous search observables,
+             * returning only the latest search service observable.
+             * > http://www.learnrxjs.io/operators/transformation/switchmap.html*/
             switchMap((term: string) => this.heroService.searchHeroes(term))
         );
 
